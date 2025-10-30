@@ -96,6 +96,9 @@ public class EnemyFollow : MonoBehaviour
         {
             animator.SetTrigger("Die");
         }
+        // Avisar al GameManager
+        ZombieManager.Instance.ZombieKilled();
+
         Destroy(gameObject, 1.2f); // permitir que se vea la animación de muerte
     }
 }

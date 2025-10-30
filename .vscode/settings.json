@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Juego-Zombi.sln"
+    "dotnet.defaultSolution": "zombie_V1.sln"
 }
