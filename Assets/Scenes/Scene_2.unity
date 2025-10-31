@@ -3230,8 +3230,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1016256672}
   m_LocalRotation: {x: -0, y: -0, z: -0.031573374, w: 0.9995015}
-  m_LocalPosition: {x: 1.6851261, y: 11.806653, z: 26.99457}
-  m_LocalScale: {x: 85.202034, y: 45.329105, z: 3.7809281}
+  m_LocalPosition: {x: 1.802, y: 13.6562, z: 27.2434}
+  m_LocalScale: {x: 85.202034, y: 41.621994, z: 3.2833579}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1182546754}
@@ -3808,8 +3808,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1332768080}
   m_LocalRotation: {x: 0.48199135, y: -0.5175637, z: 0.48476878, w: 0.5145983}
-  m_LocalPosition: {x: 4.805526, y: 34.67095, z: -24.638031}
-  m_LocalScale: {x: 105.23231, y: 93.60819, z: -3.303851}
+  m_LocalPosition: {x: 2.0346, y: 34.8504, z: -19.1057}
+  m_LocalScale: {x: 94.140816, y: 88.12275, z: -3.303851}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1182546754}
@@ -4039,8 +4039,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1431519568}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.9845261, y: 11.940253, z: -56.905434}
-  m_LocalScale: {x: 84.744415, y: 44.325645, z: 3.7809281}
+  m_LocalPosition: {x: 0.9845, y: 12.6805, z: -56.8528}
+  m_LocalScale: {x: 84.744415, y: 45.80564, z: 1.686672}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1182546754}
@@ -4394,8 +4394,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1634433367}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10.217949, y: 8.174359, z: 11.266719}
+  m_LocalPosition: {x: 1.7261, y: 0, z: -0.0521}
+  m_LocalScale: {x: 8.885717, y: 8.174359, z: 8.815788}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -4634,6 +4634,20 @@ MonoBehaviour:
   locomotionSmooth: 10
   healthBar: {fileID: 1015284465}
   healthText: {fileID: 934361477}
+--- !u!64 &1699686900
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699686894}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &1764202133
 GameObject:
   m_ObjectHideFlags: 0
