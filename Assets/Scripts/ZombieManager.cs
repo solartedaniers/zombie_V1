@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ZombieManager : MonoBehaviour
 {
@@ -44,5 +45,12 @@ public class ZombieManager : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
+
+    // Llamado por el botón de victoria
+    public void GoToScene4()
+    {
+        Time.timeScale = 1f;   // Reanudar el juego
+        SceneManager.LoadScene(2);
     }
 }

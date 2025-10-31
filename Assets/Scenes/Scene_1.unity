@@ -539,7 +539,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400060, guid: fcb334eb247ae3e488abb081c847cf09, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.89
+      value: 3.59
       objectReference: {fileID: 0}
     - target: {fileID: 400060, guid: fcb334eb247ae3e488abb081c847cf09, type: 3}
       propertyPath: m_LocalPosition.z
@@ -816,11 +816,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8429865231615740692, guid: 06cb2b131fe009c47a523671a8fa9ed8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.51
+      value: 4.091
       objectReference: {fileID: 0}
     - target: {fileID: 8429865231615740692, guid: 06cb2b131fe009c47a523671a8fa9ed8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -37.2
+      value: -35.934
       objectReference: {fileID: 0}
     - target: {fileID: 8429865231615740692, guid: 06cb2b131fe009c47a523671a8fa9ed8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -916,7 +916,6 @@ MonoBehaviour:
   locomotionSmooth: 10
   healthBar: {fileID: 1186053352}
   healthText: {fileID: 235948579}
-  hitCooldownSeconds: 0.75
 --- !u!195 &42303427
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1320,7 +1319,6 @@ MonoBehaviour:
   locomotionSmooth: 10
   healthBar: {fileID: 1880869836}
   healthText: {fileID: 1892653416}
-  hitCooldownSeconds: 0.75
 --- !u!195 &56635292
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2593,7 +2591,6 @@ MonoBehaviour:
   locomotionSmooth: 10
   healthBar: {fileID: 1961038028}
   healthText: {fileID: 2121696793}
-  hitCooldownSeconds: 0.75
 --- !u!1 &308141329
 GameObject:
   m_ObjectHideFlags: 0
@@ -4040,7 +4037,6 @@ MonoBehaviour:
   locomotionSmooth: 10
   healthBar: {fileID: 923435498}
   healthText: {fileID: 433123038}
-  hitCooldownSeconds: 0.75
 --- !u!195 &602063203
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -4738,7 +4734,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 813573628}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11500000, guid: 2b0c49a3ffadaf545b524b4a1a2e390a, type: 3}
+        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
+        m_MethodName: set_name
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &813573628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5341,7 +5349,6 @@ MonoBehaviour:
   locomotionSmooth: 10
   healthBar: {fileID: 782876641}
   healthText: {fileID: 264027148}
-  hitCooldownSeconds: 0.75
 --- !u!195 &925672469
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -5645,7 +5652,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8429865231615740692, guid: 06cb2b131fe009c47a523671a8fa9ed8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.51
+      value: 4.089
       objectReference: {fileID: 0}
     - target: {fileID: 8429865231615740692, guid: 06cb2b131fe009c47a523671a8fa9ed8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5745,7 +5752,6 @@ MonoBehaviour:
   locomotionSmooth: 10
   healthBar: {fileID: 226220303}
   healthText: {fileID: 114935324}
-  hitCooldownSeconds: 0.75
 --- !u!195 &928555071
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -6217,7 +6223,6 @@ MonoBehaviour:
   locomotionSmooth: 10
   healthBar: {fileID: 1793277896}
   healthText: {fileID: 1960542598}
-  hitCooldownSeconds: 0.75
 --- !u!195 &969888260
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -6873,7 +6878,6 @@ MonoBehaviour:
   locomotionSmooth: 10
   healthBar: {fileID: 764569945}
   healthText: {fileID: 559904262}
-  hitCooldownSeconds: 0.75
 --- !u!195 &1099339453
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -7346,6 +7350,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 146760, guid: fd39af73f562aa04cb405bd0953160cc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 401514, guid: fd39af73f562aa04cb405bd0953160cc, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -7722,7 +7730,6 @@ MonoBehaviour:
   locomotionSmooth: 10
   healthBar: {fileID: 1644323300}
   healthText: {fileID: 146069529}
-  hitCooldownSeconds: 0.75
 --- !u!195 &1235396353
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -8642,7 +8649,7 @@ MonoBehaviour:
   - {fileID: 381564798}
   - {fileID: 756191570}
   gameOverCanvas: {fileID: 1618405470}
-  enableSelfCollisionDetection: 0
+  invulnerabilityTime: 5
 --- !u!114 &1553568904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10369,7 +10376,6 @@ MonoBehaviour:
   locomotionSmooth: 10
   healthBar: {fileID: 1348536280}
   healthText: {fileID: 2023651051}
-  hitCooldownSeconds: 0.75
 --- !u!195 &1804697335
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -11742,7 +11748,6 @@ MonoBehaviour:
   locomotionSmooth: 10
   healthBar: {fileID: 1403726849}
   healthText: {fileID: 553653909}
-  hitCooldownSeconds: 0.75
 --- !u!195 &2024559491
 NavMeshAgent:
   m_ObjectHideFlags: 0

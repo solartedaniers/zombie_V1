@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UI; // Para la barra de vida
-using TMPro; // Para el texto TMP
+using UnityEngine.UI;
+using TMPro;
 
 public class EnemyFollow : MonoBehaviour
 {
@@ -10,22 +10,21 @@ public class EnemyFollow : MonoBehaviour
     public float speed = 3.5f;
     public int hitsToDie = 2;
     [SerializeField] public float attackRange = 2f;
-    [SerializeField] private float attackRangeEnter = 1.8f; // histéresis de entrada
-    [SerializeField] private float attackRangeExit = 2.2f;  // histéresis de salida
-    [SerializeField] private float locomotionSmooth = 10f;  // suavizado del parámetro Speed
+    [SerializeField] private float attackRangeEnter = 1.8f;
+    [SerializeField] private float attackRangeExit = 2.2f;
+    [SerializeField] private float locomotionSmooth = 10f;
 
     [Header("UI de Vida")]
-    public Image healthBar; // Imagen circular con fill radial
-    public TextMeshProUGUI healthText; // Texto TMP que muestra el porcentaje
+    public Image healthBar;
+    public TextMeshProUGUI healthText;
 
     private Transform player;
     private NavMeshAgent agent;
     private int currentHits = 0;
-    private float lastPlayerHitTime = -999f;
-    public float hitCooldownSeconds = 0.75f;
     private Animator animator;
     private float animatorSpeedParam = 0f;
     private bool isAttacking = false;
+    private bool isDead = false;   // ✅ evita múltiples muertes
 
     void Start()
     {
@@ -44,37 +43,30 @@ public class EnemyFollow : MonoBehaviour
 
         animator = GetComponentInChildren<Animator>();
         if (animator != null)
-        {
-            animator.applyRootMotion = false; // locomoción en sitio, movimiento por NavMeshAgent
-        }
+            animator.applyRootMotion = false;
+
         UpdateHealthUI();
     }
 
     void Update()
     {
-        if (player == null || agent == null) return;
+        if (player == null || agent == null || isDead) return;
 
         float distance = Vector3.Distance(transform.position, player.position);
-        if (distance <= detectionRange)
-        {
-            agent.SetDestination(player.position);
-        }
-        else
-        {
-            agent.ResetPath();
-        }
 
-        // Lógica de ataque con histéresis para evitar parpadeos de estados
+        if (distance <= detectionRange)
+            agent.SetDestination(player.position);
+        else
+            agent.ResetPath();
+
         if (!isAttacking && distance <= attackRangeEnter)
             isAttacking = true;
         else if (isAttacking && distance >= attackRangeExit)
             isAttacking = false;
 
-        if (agent != null)
-            agent.isStopped = isAttacking;
+        agent.isStopped = isAttacking;
 
-        // Actualizar parámetros del Animator con suavizado
-        if (animator != null && agent != null)
+        if (animator != null)
         {
             float targetSpeed = isAttacking ? 0f : agent.velocity.magnitude;
             animatorSpeedParam = Mathf.Lerp(animatorSpeedParam, targetSpeed, locomotionSmooth * Time.deltaTime);
@@ -84,59 +76,43 @@ public class EnemyFollow : MonoBehaviour
     }
 
     public void TakeHit()
-{
-    currentHits++;
-    Debug.Log("Zombi recibió un disparo. Hits: " + currentHits);
-    UpdateHealthUI();
-
-    if (currentHits >= hitsToDie)
     {
-        Debug.Log("Zombi destruido");
+        if (isDead) return; // ✅ evita daño después de muerto
+
+        currentHits++;
+        UpdateHealthUI();
+
+        if (currentHits >= hitsToDie)
+            Die();
+    }
+
+    void Die()
+    {
+        if (isDead) return; // ✅ evita que ejecute dos veces
+        isDead = true;
+
+        if (agent != null)
+            agent.isStopped = true;
+
         if (animator != null)
-        {
             animator.SetTrigger("Die");
-        }
-        // Avisar al GameManager
+
         ZombieManager.Instance.ZombieKilled();
-
-        Destroy(gameObject, 1.2f); // permitir que se vea la animación de muerte
-    }
-}
-
-    // Daño al jugador cuando entra en el trigger del enemigo (recomendado con CharacterController)
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!other.CompareTag("Player")) return;
-
-        if (Time.time - lastPlayerHitTime < hitCooldownSeconds) return;
-        lastPlayerHitTime = Time.time;
-
-        var life = other.GetComponentInParent<LifeManager>();
-        if (life != null)
-        {
-            // Llama a la lógica de quitar vida del jugador
-            life.TakeHit();
-        }
-        else
-        {
-            // Alternativa: si usas GameOverManager con corazones
-            var gm = FindObjectOfType<GameOverManager>();
-            if (gm != null)
-            {
-                gm.TakeHit();
-            }
-        }
+        Destroy(gameObject, 1.2f);
     }
 
-    // Fallback si decides usar colliders no-trigger y Rigidbody en enemigo
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other) => TryDamage(other);
+    private void OnTriggerStay(Collider other) => TryDamage(other);
+    private void OnCollisionEnter(Collision collision) => TryDamage(collision.collider);
+    private void OnCollisionStay(Collision collision) => TryDamage(collision.collider);
+
+    void TryDamage(Collider col)
     {
-        if (!collision.collider.CompareTag("Player")) return;
+        if (isDead) return; // ✅ zombi muerto ya no daña jugador
 
-        if (Time.time - lastPlayerHitTime < hitCooldownSeconds) return;
-        lastPlayerHitTime = Time.time;
+        if (!col.CompareTag("Player")) return;
 
-        var life = collision.collider.GetComponentInParent<LifeManager>();
+        var life = col.GetComponentInParent<LifeManager>();
         if (life != null)
         {
             life.TakeHit();
@@ -144,20 +120,15 @@ public class EnemyFollow : MonoBehaviour
         else
         {
             var gm = FindObjectOfType<GameOverManager>();
-            if (gm != null)
-            {
-                gm.TakeHit();
-            }
+            if (gm != null) gm.TakeHit();
         }
     }
 
     void UpdateHealthUI()
     {
         float healthPercent = 1f - ((float)currentHits / hitsToDie);
-
         if (healthBar != null)
             healthBar.fillAmount = healthPercent;
-
         if (healthText != null)
             healthText.text = Mathf.RoundToInt(healthPercent * 100f) + "%";
     }
