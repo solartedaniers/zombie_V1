@@ -13,10 +13,8 @@ public class Bullet : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         if (rb != null)
         {
-            // Asegurar configuración física adecuada para evitar "túnel"
             rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             rb.interpolation = RigidbodyInterpolation.Interpolate;
-            // La velocidad se establece desde PlayerShooting para mantener una sola fuente de verdad
         }
         Destroy(gameObject, lifeTime);
     }
@@ -30,11 +28,10 @@ public class Bullet : MonoBehaviour
             Destroy(effect, 1.5f);
         }
 
-        // Buscar el componente en el padre por si el collider está en un hijo del enemigo
-        EnemyFollow enemy = other.GetComponentInParent<EnemyFollow>();
+        EnemyFollowBase enemy = other.GetComponentInParent<EnemyFollowBase>();
         if (enemy != null)
         {
-            enemy.TakeHit();
+            enemy.TakeBulletHit(other.GetComponent<Collider>());
         }
 
         Destroy(gameObject);

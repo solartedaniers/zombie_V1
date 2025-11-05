@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Ground
   - Casa
+  - eyes
+  - Bullet
   layers:
   - Default
   - TransparentFX
