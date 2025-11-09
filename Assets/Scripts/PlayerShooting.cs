@@ -3,15 +3,15 @@ using UnityEngine;
 public class PlayerShooting : MonoBehaviour
 {
     [Header("Disparo")]
-    public GameObject bulletPrefab;      // Prefab de la bala
-    public Transform firePoint;          // Punto de salida del disparo
-    public AudioSource shootSound;       // Sonido del disparo
-    public float fireRate = 0.5f;        // Tiempo entre disparos
-    public float bulletSpeed = 20f;      // Velocidad de la bala
-    public float bulletRange = 25f;      // Distancia máxima de la bala
+    public GameObject bulletPrefab;       // Prefab de la bala
+    public Transform firePoint;           // Punto de salida del disparo
+    public AudioSource shootSound;        // Sonido del disparo
+    public float fireRate = 0.5f;         // Tiempo entre disparos
+    public float bulletSpeed = 20f;       // Velocidad de la bala
+    public float bulletRange = 25f;       // Distancia máxima de la bala
 
     [Header("Impacto")]
-    public GameObject defaultHitEffect;  // Efecto por defecto si el prefab no lo trae
+    public GameObject defaultHitEffect;   // Efecto por defecto si el prefab no lo trae
 
     private float nextFireTime = 0f;
 
@@ -26,13 +26,27 @@ public class PlayerShooting : MonoBehaviour
 
     void Shoot()
     {
-        // Crear una nueva bala al disparar
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        // 1 - Raycast desde la cámara (centro de la pantalla)
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        RaycastHit hit;
+        Vector3 targetPoint;
 
-        // Activar (por si el prefab está desactivado)
+        if (Physics.Raycast(ray, out hit, 100f))
+        {
+            targetPoint = hit.point;
+        }
+        else
+        {
+            targetPoint = ray.origin + ray.direction * 100f;
+        }
+
+        // 2 - Dirección final del disparo desde el firePoint hacia la mira/crosshair
+        Vector3 shootDirection = (targetPoint - firePoint.position).normalized;
+
+        // 3 - Instancia la bala y que apunte hacia el target
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.LookRotation(shootDirection));
         bullet.SetActive(true);
 
-        // Asegurar que la bala tenga un Collider
         Collider col = bullet.GetComponent<Collider>();
         if (col == null)
         {
@@ -42,7 +56,6 @@ public class PlayerShooting : MonoBehaviour
             col = sc;
         }
 
-        // Asegurar que la bala tenga el script Bullet y configurar sus parámetros
         Bullet bulletComp = bullet.GetComponent<Bullet>();
         if (bulletComp == null)
         {
@@ -54,21 +67,18 @@ public class PlayerShooting : MonoBehaviour
             bulletComp.hitEffect = defaultHitEffect;
         }
 
-        // Si la bala tiene Rigidbody, darle velocidad
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         if (rb != null)
         {
             rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             rb.interpolation = RigidbodyInterpolation.Interpolate;
-            rb.velocity = firePoint.forward * bulletSpeed;
+            rb.velocity = shootDirection * bulletSpeed;
         }
         else
         {
-            // Si no tiene Rigidbody, moverla manualmente
             bullet.AddComponent<BulletMover>().Initialize(bulletSpeed, bulletRange);
         }
 
-        // Reproducir sonido del disparo
         if (shootSound != null)
         {
             shootSound.Play();

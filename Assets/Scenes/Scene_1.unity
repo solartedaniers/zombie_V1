@@ -780,7 +780,7 @@ RectTransform:
   m_GameObject: {fileID: 73022485}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.988826, y: 0.988826, z: 0.988826}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1205351774}
@@ -874,7 +874,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 15.215129}
+  m_margin: {x: 0, y: 0.79076433, z: 0, w: 15.215129}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -5685,14 +5685,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: 2b0c49a3ffadaf545b524b4a1a2e390a, type: 3}
-        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
-        m_MethodName: set_name
-        m_Mode: 5
+      - m_Target: {fileID: 1618405475}
+        m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
+        m_MethodName: LoadSceneByIndex
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -8146,7 +8146,7 @@ GameObject:
   - component: {fileID: 1156491734}
   - component: {fileID: 1156491733}
   m_Layer: 5
-  m_Name: TimerText
+  m_Name: Time_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8560,10 +8560,10 @@ RectTransform:
   m_Father: {fileID: 1595063135}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.10002, y: 10.849998}
-  m_SizeDelta: {x: 160, y: -130.5}
+  m_AnchoredPosition: {x: -0.3, y: -58.102783}
+  m_SizeDelta: {x: 158.985, y: 28.211899}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1205351775
 MonoBehaviour:
@@ -12640,7 +12640,7 @@ GameObject:
   - component: {fileID: 2132124098}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
