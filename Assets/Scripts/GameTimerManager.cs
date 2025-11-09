@@ -1,10 +1,11 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameTimerManager : MonoBehaviour
 {
     public static GameTimerManager Instance;
 
-    private float[] sceneTimes = new float[3]; // Almacena el tiempo de las 3 escenas
+    private float[] sceneTimes; // Almacena el tiempo de las escenas
     private float startTime;
     private bool timerRunning = false;
     private int currentSceneIndex;
@@ -15,6 +16,10 @@ public class GameTimerManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject); // Se mantiene entre escenas
+
+            // 🔹 Ajusta automáticamente el tamaño del arreglo según las escenas del Build Settings
+            int totalScenes = SceneManager.sceneCountInBuildSettings;
+            sceneTimes = new float[totalScenes];
         }
         else
         {

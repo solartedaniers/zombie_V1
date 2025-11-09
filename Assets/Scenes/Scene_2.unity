@@ -3695,10 +3695,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeObjects:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  gameOverCanvas: {fileID: 0}
+  - {fileID: 687998466}
+  - {fileID: 421541779}
+  - {fileID: 445735991}
+  gameOverCanvas: {fileID: 1817766245}
   invulnerabilityTime: 5
 --- !u!143 &912773681
 CharacterController:
