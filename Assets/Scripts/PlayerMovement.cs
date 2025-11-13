@@ -69,4 +69,21 @@ public class PlayerMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
     }
+
+    // 🔹 Evitar que el jugador se suba encima del enemigo
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.collider.CompareTag("Enemy"))
+        {
+            // Cancelar movimiento vertical si está encima del enemigo
+            if (hit.moveDirection.y > 0.3f)
+            {
+                velocity.y = 0f;
+            }
+
+            // Impedir avanzar empujando ligeramente hacia atrás
+            Vector3 pushBack = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+            controller.Move(-pushBack * 0.1f);
+        }
+    }
 }

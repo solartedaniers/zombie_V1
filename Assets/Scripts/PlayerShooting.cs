@@ -7,8 +7,7 @@ public class PlayerShooting : MonoBehaviour
     public Transform firePoint;           // Punto de salida del disparo
     public AudioSource shootSound;        // Sonido del disparo
     public float fireRate = 0.5f;         // Tiempo entre disparos
-    public float bulletSpeed = 20f;       // Velocidad de la bala
-    public float bulletRange = 25f;       // Distancia máxima de la bala
+    public float bulletSpeed = 30f;       // Velocidad de la bala
 
     [Header("Impacto")]
     public GameObject defaultHitEffect;   // Efecto por defecto si el prefab no lo trae
@@ -76,7 +75,7 @@ public class PlayerShooting : MonoBehaviour
         }
         else
         {
-            bullet.AddComponent<BulletMover>().Initialize(bulletSpeed, bulletRange);
+            bullet.AddComponent<BulletMover>().Initialize(bulletSpeed);
         }
 
         if (shootSound != null)
@@ -85,30 +84,20 @@ public class PlayerShooting : MonoBehaviour
         }
     }
 
-    // Clase interna para controlar el movimiento y destrucción de la bala
+    // Clase interna para controlar el movimiento continuo de la bala (sin límite de distancia)
     private class BulletMover : MonoBehaviour
     {
         private float speed;
-        private float range;
-        private Vector3 startPosition;
 
-        public void Initialize(float bulletSpeed, float bulletRange)
+        public void Initialize(float bulletSpeed)
         {
             speed = bulletSpeed;
-            range = bulletRange;
-            startPosition = transform.position;
         }
 
         void Update()
         {
-            // Mover la bala hacia adelante
+            // Mover la bala hacia adelante indefinidamente
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
-
-            // Verificar distancia recorrida
-            if (Vector3.Distance(startPosition, transform.position) >= range)
-            {
-                Destroy(gameObject);
-            }
         }
     }
 }
