@@ -1,4 +1,6 @@
 using UnityEngine;
+using TMPro;
+using System.Collections;
 
 public class PlayerShooting : MonoBehaviour
 {
@@ -12,10 +14,45 @@ public class PlayerShooting : MonoBehaviour
     [Header("Impacto")]
     public GameObject defaultHitEffect;   // Efecto por defecto si el prefab no lo trae
 
+    [Header("Munición")]
+    public int maxAmmo = 30;              // Máximo de balas por recarga
+    private int currentAmmo;              // Balas actuales
+    public float reloadTime = 1f;         // Tiempo de recarga (1 segundo)
+    private bool isReloading = false;     // Estado de recarga
+    public TMP_Text ammoText;             // Texto TMP en el Canvas para mostrar la munición
+
     private float nextFireTime = 0f;
+
+    void Start()
+    {
+        currentAmmo = maxAmmo;
+        UpdateAmmoUI();
+    }
 
     void Update()
     {
+        // Si está recargando, no puede disparar
+        if (isReloading) return;
+
+        // Si presiona R y no está recargando, recargar
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            StartCoroutine(Reload());
+            return;
+        }
+
+        // Si intenta disparar sin balas
+        if (currentAmmo <= 0)
+        {
+            // Mostrar mensaje para recargar
+            if (ammoText != null)
+            {
+                ammoText.text = "Presiona R para recargar";
+            }
+            return;
+        }
+
+        // Disparo normal
         if (Input.GetButtonDown("Fire1") && Time.time > nextFireTime)
         {
             Shoot();
@@ -25,6 +62,10 @@ public class PlayerShooting : MonoBehaviour
 
     void Shoot()
     {
+        // Restar una bala
+        currentAmmo--;
+        UpdateAmmoUI();
+
         // 1 - Raycast desde la cámara (centro de la pantalla)
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         RaycastHit hit;
@@ -81,6 +122,30 @@ public class PlayerShooting : MonoBehaviour
         if (shootSound != null)
         {
             shootSound.Play();
+        }
+    }
+
+    IEnumerator Reload()
+    {
+        isReloading = true;
+
+        if (ammoText != null)
+        {
+            ammoText.text = "Recargando...";
+        }
+
+        yield return new WaitForSeconds(reloadTime);
+
+        currentAmmo = maxAmmo;
+        UpdateAmmoUI();
+        isReloading = false;
+    }
+
+    void UpdateAmmoUI()
+    {
+        if (ammoText != null)
+        {
+            ammoText.text = "Balas: " + currentAmmo + " / " + maxAmmo;
         }
     }
 
