@@ -3,7 +3,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float speed = 20f;
-    public float lifeTime = 2f;
+    public float lifeTime = 6f;
     public GameObject hitEffect;
 
     private Rigidbody rb;
@@ -34,7 +34,8 @@ public class Bullet : MonoBehaviour
             enemy.TakeBulletHit(other.GetComponent<Collider>());
         }
 
-        Destroy(gameObject);
+        // ✅ Espera una fracción antes de destruir la bala, para evitar que la explosión se pierda visualmente
+        Destroy(gameObject, 0.05f);
     }
 
     void OnCollisionEnter(Collision collision)

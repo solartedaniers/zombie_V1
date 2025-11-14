@@ -9,7 +9,7 @@ public class PlayerShooting : MonoBehaviour
     public Transform firePoint;           // Punto de salida del disparo
     public AudioSource shootSound;        // Sonido del disparo
     public float fireRate = 0.5f;         // Tiempo entre disparos
-    public float bulletSpeed = 30f;       // Velocidad de la bala
+    public float bulletSpeed = 20f;       // Velocidad de la bala
 
     [Header("Impacto")]
     public GameObject defaultHitEffect;   // Efecto por defecto si el prefab no lo trae

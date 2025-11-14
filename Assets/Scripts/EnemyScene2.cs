@@ -7,8 +7,8 @@ public class EnemyScene2 : EnemyFollowBase
     protected override void Start()
     {
         hitsToDie = 4;
-        speed = 4f;
-        detectionRange = 20f;
+        speed = 8f;
+        detectionRange = 15f;
         base.Start();
     }
 

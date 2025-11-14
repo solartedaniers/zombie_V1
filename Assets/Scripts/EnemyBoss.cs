@@ -7,7 +7,7 @@ public class EnemyBoss : EnemyFollowBase
     protected override void Start()
     {
         hitsToDie = 10;     
-        speed = 2.5f;       
+        speed = 6f;       
         detectionRange = 30f;
         attackRange = 3f;   
 
