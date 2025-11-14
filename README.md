@@ -90,6 +90,8 @@ El jugador enfrenta enemigos, gestiona vidas, daño, munición y recibe un **res
    - 🪟 **Windows:** `CazaDeZombis.exe`
    - 🍎 **macOS:** `CazaDeZombis.app`
 
+   pero por el peso del documento no se pudo colocar en el repositorio 
+
 ---
 
 ## 🎮 Controles
