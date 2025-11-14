@@ -1,5 +1,7 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class FinalResultsManager : MonoBehaviour
 {
@@ -11,6 +13,9 @@ public class FinalResultsManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI gradeText;
 
+    [Header("Botón para volver a escena 1")]
+    public Button reiniciarButton; // Asigna este botón desde el inspector
+
     void Start()
     {
         if (GameTimerManager.Instance == null)
@@ -19,25 +24,48 @@ public class FinalResultsManager : MonoBehaviour
             return;
         }
 
-        // Obtener tiempos de cada nivel jugable según los índices reales
         float t1 = GameTimerManager.Instance.GetSceneTime(2); // Nivel 1
         float t2 = GameTimerManager.Instance.GetSceneTime(3); // Nivel 2
         float t3 = GameTimerManager.Instance.GetSceneTime(4); // Nivel 3
 
         float total = t1 + t2 + t3;
 
-        // Mostrar tiempos individuales en el Canvas
         scene1TimeText.text = "Escena 1: " + FormatTime(t1);
         scene2TimeText.text = "Escena 2: " + FormatTime(t2);
         scene3TimeText.text = "Escena 3: " + FormatTime(t3);
 
-        // Total acumulado
         totalTimeText.text = "Tiempo total: " + FormatTime(total);
 
-        // Puntuación y calificación
-        int score = GameTimerManager.Instance.GetScore();
+        int score;
+        string grade;
+
+        if (total <= 240f) // 4 min o menos
+        {
+            score = 1000;
+            grade = "Excelente";
+        }
+        else if (total <= 360f) // Entre 5 y 6 min
+        {
+            score = 600;
+            grade = "Bueno";
+        }
+        else if (total <= 480f) // Entre 7 y 8 min
+        {
+            score = 400;
+            grade = "Regular";
+        }
+        else // 9 min o más
+        {
+            score = 100;
+            grade = "Lento";
+        }
+
         scoreText.text = "Puntuación: " + score;
-        gradeText.text = "Calificación: " + GetGrade(total);
+        gradeText.text = "Calificación: " + grade;
+
+        // Asigna el evento del botón para reiniciar a escena 1
+        if (reiniciarButton != null)
+            reiniciarButton.onClick.AddListener(() => IrAEscenaUno());
     }
 
     private string FormatTime(float seconds)
@@ -47,11 +75,9 @@ public class FinalResultsManager : MonoBehaviour
         return $"{minutes:00}:{secs:00}";
     }
 
-    private string GetGrade(float totalTime)
+    // Método para ir directamente a la escena 1
+    public void IrAEscenaUno()
     {
-        if (totalTime <= 90f) return "Excelente 🌟";
-        if (totalTime <= 150f) return "Bueno 👍";
-        if (totalTime <= 240f) return "Regular 😐";
-        return "Lento ⏳";
+        SceneManager.LoadScene(1); // Cambia el número si tu escena 1 no es el índice 1
     }
 }

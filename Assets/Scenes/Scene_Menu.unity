@@ -1182,7 +1182,6 @@ GameObject:
   - component: {fileID: 876236710}
   - component: {fileID: 876236709}
   - component: {fileID: 876236708}
-  - component: {fileID: 876236707}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1190,18 +1189,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &876236707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 876236706}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b12fea33a5f7de4495b654ff8a426a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &876236708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2459,7 +2446,7 @@ MonoBehaviour:
     castillo antiguo, ciudad moderna), derrotando enemigos y acumulando el mayor
     puntaje posible.
 
-    
+
 
 '
   m_isRightToLeft: 0
